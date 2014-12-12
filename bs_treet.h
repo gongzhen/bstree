@@ -34,7 +34,7 @@ class BSTreeT {
     string ToStringBackwards();
 
   private:
-    BSTNodeT *root_ptr_;
+    BSTNodeT<T> *root_ptr_;
     int size_;
 
 };
@@ -75,7 +75,9 @@ int BSTreeT<T>::Remove(T value) {
 }
 
 template<typename T>
-BSTNodeT<T>* BSTreeT<T>::Get(T value);
+BSTNodeT<T>* BSTreeT<T>::Get(T value) {
+
+}
 
 template<typename T>
 string BSTreeT<T>::ToStringForwards() {

@@ -1,5 +1,6 @@
+#ifndef MURPHY_BSTNODET_H
+#define MURPHY_BSTNODET_H
 template<typename T>
-
 class BSTNodeT {
   public:
     BSTNodeT();
@@ -12,8 +13,8 @@ class BSTNodeT {
     void IncrementCount();
     void DecrementCount();
     const T GetContents();
-    BSTNodeT& GetLeft();
-    BSTNodeT& GetRight();
+    BSTNodeT* GetLeft();
+    BSTNodeT* GetRight();
     int GetCount();
   private:
     T contents_;
@@ -22,49 +23,62 @@ class BSTNodeT {
     BSTNodeT *right_ptr;
 };
 
-BSTNodeT::BSTNodeT() {
+template<typename T>
+BSTNodeT<T>::BSTNodeT() {
 
 }
 
-BSTNodeT::BSTNodeT(T contents) {
+template<typename T>
+BSTNodeT<T>::BSTNodeT(T contents) {
 
 }
 
-BSTNodeT::~BSTNodeT() {
+template<typename T>
+BSTNodeT<T>::~BSTNodeT() {
 
 }
 
-void BSTNodeT::SetContents(T contents) {
+template<typename T>
+void BSTNodeT<T>::SetContents(T contents) {
 
 }
 
-void BSTNodeT::SetLeft(BSTNodeT *left) {
+template<typename T>
+void BSTNodeT<T>::SetLeft(BSTNodeT *left) {
 
 }
 
-void BSTNodeT::SetRight(BSTNodeT *right) {
+template<typename T>
+void BSTNodeT<T>::SetRight(BSTNodeT *right) {
 
 }
 
-void BSTNodeT::IncrementCount() {
+template<typename T>
+void BSTNodeT<T>::IncrementCount() {
 
 }
 
-void BSTNodeT::DecrementCount() {
+template<typename T>
+void BSTNodeT<T>::DecrementCount() {
 
 }
 
-const T BSTNodeT::GetContents() {
+template<typename T>
+const T BSTNodeT<T>::GetContents() {
 
 }
 
-BSTNodeT<T>& BSTNodeT::GetLeft() {
+template<typename T>
+BSTNodeT<T>* BSTNodeT<T>::GetLeft() {
 
 }
 
-BSTNodeT<T>& BSTNodeT::GetRight() {
+template<typename T>
+BSTNodeT<T>* BSTNodeT<T>::GetRight() {
 
 }
 
-int BSTNodeT::GetCount() {
+template<typename T>
+int BSTNodeT<T>::GetCount() {
 }
+#endif
