@@ -3,8 +3,11 @@
  * Author      : Patrick Murphy
  * Description : binary search tree template
  */
+#ifndef MURPHY_BS_TREE_H
+#define MURPHY_BS_TREE_H
 #include "bst_nodet.h"
 #include <string>
+#include <iostream>
 
 using std::string;
 
@@ -26,7 +29,7 @@ class BSTreeT {
     int Insert(T value);
     bool Exists(T value);
     int Remove(T value);
-    BSTNodeT* Get(T value);
+    BSTNodeT<T>* Get(T value);
     string ToStringForwards();
     string ToStringBackwards();
 
@@ -36,42 +39,51 @@ class BSTreeT {
 
 };
 
-BSTreeT::BSTreeT() {
-
-}
-
-BSTreeT::~BSTreeT() {
-
-}
-
-const int BSTreeT::GetSize() {
-
-}
-
-void BSTreeT::Clear() {
-
-}
-
-int BSTreeT::Insert(T value) {
-
-}
-
-bool BSTreeT::Exists(T value) {
-
-}
-
-int BSTreeT::Remove(T value) {
+template<typename T>
+BSTreeT<T>::BSTreeT() {
 
 }
 
 template<typename T>
-BSTNodeT* BSTreeT::Get(T value) {
+BSTreeT<T>::~BSTreeT() {
 
 }
 
-string BSTreeT::ToStringForwards() {
+template<typename T>
+const int BSTreeT<T>::GetSize() {
 
 }
 
-string BSTreeT::ToStringBackwards() {
+template<typename T>
+void BSTreeT<T>::Clear() {
+
 }
+
+template<typename T>
+int BSTreeT<T>::Insert(T value) {
+
+}
+
+template<typename T>
+bool BSTreeT<T>::Exists(T value) {
+
+}
+
+template<typename T>
+int BSTreeT<T>::Remove(T value) {
+
+}
+
+template<typename T>
+BSTNodeT<T>* BSTreeT<T>::Get(T value);
+
+template<typename T>
+string BSTreeT<T>::ToStringForwards() {
+
+}
+
+template<typename T>
+string BSTreeT<T>::ToStringBackwards() {
+
+}
+#endif

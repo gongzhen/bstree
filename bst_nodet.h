@@ -58,11 +58,11 @@ const T BSTNodeT::GetContents() {
 
 }
 
-BSTNodeT& BSTNodeT::GetLeft() {
+BSTNodeT<T>& BSTNodeT::GetLeft() {
 
 }
 
-BSTNodeT& BSTNodeT::GetRight() {
+BSTNodeT<T>& BSTNodeT::GetRight() {
 
 }
 

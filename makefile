@@ -3,7 +3,8 @@ CXX = /usr/bin/g++
 MAIN = unit_test
 CPP_FILES = unit_test.cpp
 H_FILES = bst_nodet.h bs_treet.h
-CXXFLAGS = -Wall -Wextra -pedantic -g
+# CXXFLAGS = -Wall -Wextra -pedantic -g
+CXXFLAGS = -g
 
 # Type 'make' to create the executable
 ${MAIN}: ${MAIN}.cpp ${H_FILES} ${CPP_FILES}
