@@ -1,5 +1,6 @@
 #ifndef MURPHY_BSTNODET_H
 #define MURPHY_BSTNODET_H
+
 template<typename T>
 class BSTNodeT {
   public:
@@ -13,8 +14,8 @@ class BSTNodeT {
     void IncrementCount();
     void DecrementCount();
     const T GetContents();
-    BSTNodeT* GetLeft();
-    BSTNodeT* GetRight();
+    BSTNodeT*& GetLeft();
+    BSTNodeT*& GetRight();
     int GetCount();
   private:
     T contents_;
@@ -40,45 +41,47 @@ BSTNodeT<T>::~BSTNodeT() {
 
 template<typename T>
 void BSTNodeT<T>::SetContents(T contents) {
-
+  contents_ = contents;
 }
 
 template<typename T>
 void BSTNodeT<T>::SetLeft(BSTNodeT *left) {
-
+  left_ptr = left;
 }
 
 template<typename T>
 void BSTNodeT<T>::SetRight(BSTNodeT *right) {
-
+  right_ptr = right;
 }
 
 template<typename T>
 void BSTNodeT<T>::IncrementCount() {
-
+  count_added_++;
 }
 
 template<typename T>
 void BSTNodeT<T>::DecrementCount() {
-
+  count_added_--;
 }
 
 template<typename T>
 const T BSTNodeT<T>::GetContents() {
-
+  return contents_;
 }
 
 template<typename T>
-BSTNodeT<T>* BSTNodeT<T>::GetLeft() {
-
+BSTNodeT<T>*& BSTNodeT<T>::GetLeft() {
+  return left_ptr;
 }
 
 template<typename T>
-BSTNodeT<T>* BSTNodeT<T>::GetRight() {
-
+BSTNodeT<T>*& BSTNodeT<T>::GetRight() {
+  return right_ptr;
 }
 
 template<typename T>
 int BSTNodeT<T>::GetCount() {
+  return count_added_;
 }
+
 #endif
