@@ -24,7 +24,7 @@ class BSTreeT {
      */
     ~BSTreeT();
 
-    const int GetSize();
+    int GetSize() const;
     void Clear();
     int Insert(T value);
     bool Exists(T value);
@@ -50,16 +50,17 @@ class BSTreeT {
 
 template<typename T>
 BSTreeT<T>::BSTreeT() {
-
+  root_ptr_ = NULL;
+  size_ = 0;
 }
 
 template<typename T>
 BSTreeT<T>::~BSTreeT() {
-
+  Clear();
 }
 
 template<typename T>
-const int BSTreeT<T>::GetSize() {
+int BSTreeT<T>::GetSize() const {
   return size_;
 }
 
@@ -135,22 +136,70 @@ bool BSTreeT<T>::Exists(T value, BSTNodeT<T>*& exists) {
 
 template<typename T>
 int BSTreeT<T>::Remove(T value, BSTNodeT<T>*& remove) {
-
+  if (remove == NULL) {
+    return 0;
+  } else if (remove->GetContents() == value) {
+    if (remove->GetLeft() == NULL && remove->GetRight() == NULL) {
+      // NO CHILD
+      delete remove;
+      remove = NULL;
+      size_--;
+    } else if ((remove->GetLeft() != NULL &&  remove->GetRight() == NULL)
+        || (remove->GetRight() != NULL && remove->GetLeft() == NULL)) {
+      // ONE CHILD
+      if (remove->GetLeft() != NULL) {
+        BSTNodeT<T> *temp = remove;
+        remove = remove->GetLeft();
+        delete temp;
+        temp = NULL;
+        size_--;
+      } else if (remove->GetRight() != NULL) {
+        BSTNodeT<T> *temp = remove;
+        remove = remove->GetRight();
+        delete temp;
+        temp = NULL;
+        size_--;
+      }
+    } else if (remove->GetLeft() != NULL && remove->GetRight() != NULL) {
+      // TWO CHILDREN
+     // int minRightTree = FindMin(remove->GetRight());
+     // remove->SetContents(minRightTree);
+     // Remove(minRightTree, remove->GetRightChild());
+    }
+  } else if (remove->GetContents() < value) {
+    return Remove(value, remove->GetRight());
+  } else if (remove->GetContents() > value) {
+    return Remove(value, remove->GetLeft());
+  } else {
+    return 0;
+  }
+  // Because "function reaches end of non-void"
+  return 0;
 }
 
 template<typename T>
 BSTNodeT<T>* BSTreeT<T>::Get(T value, BSTNodeT<T>*& get) {
+  if (get == NULL || root_ptr_ == NULL) {
+    return NULL;
+  }
 
+  if (get->GetContents() == value) {
+    return get;
+  }
+
+  if (get->GetLeft() == NULL) {
+
+  }
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringForwards(BSTNodeT<T>*& stringForward) {
-
+  return "string";
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringBackwards(BSTNodeT<T>*& stringBackwards) {
-
+  return "string";
 }
 
 #endif

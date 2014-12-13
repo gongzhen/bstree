@@ -31,7 +31,7 @@ BSTNodeT<T>::BSTNodeT() {
 
 template<typename T>
 BSTNodeT<T>::BSTNodeT(T contents) {
-
+  contents_ = contents;
 }
 
 template<typename T>
