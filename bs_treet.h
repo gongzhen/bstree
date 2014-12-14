@@ -46,7 +46,7 @@ class BSTreeT {
     bool Exists(T value, BSTNodeT<T>*& exists);
     int Remove(T value, BSTNodeT<T>*& remove);
     BSTNodeT<T>* Get(T value, BSTNodeT<T>*& get);
-    string ToStringForwards(BSTNodeT<T>*& stringForward);
+    string ToStringForwards(std::ostream &out, BSTNodeT<T>*& stringForward);
     string ToStringBackwards(BSTNodeT<T>*& stringBackwards);
 };
 
@@ -93,7 +93,8 @@ BSTNodeT<T>* BSTreeT<T>::Get(T value) {
 
 template<typename T>
 string BSTreeT<T>::ToStringForwards() {
-  return ToStringForwards(root_ptr_);
+  //return ToStringForwards(root_ptr_);
+  return "";
 }
 
 template<typename T>
@@ -202,25 +203,25 @@ BSTNodeT<T>* BSTreeT<T>::Get(T value, BSTNodeT<T>*& get) {
 }
 
 template<typename T>
-string BSTreeT<T>::ToStringForwards(BSTNodeT<T>*& stringForward) {
-  stringstream ss;
-
-  if (stringForward != NULL) {
-    if (stringForward->GetLeft() != NULL) {
-      ToStringForwards(stringForward->GetLeft());
-    }
-    if (stringForward->GetRight() != NULL) {
-      ToStringForwards(stringForward->GetRight());
-    }
-    ss << stringForward->GetContents() << " ";
+string BSTreeT<T>::ToStringForwards(std::ostream &out, BSTNodeT<T>*& stringForward) {
+  if (stringForward == NULL) {
   }
-
-  return ss.str();
+  return "";
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringBackwards(BSTNodeT<T>*& stringBackwards) {
-  return "";
+  stringstream ss;
+  if (stringBackwards != NULL) {
+    cout << "Contents: " << stringBackwards->GetContents() << "\n";
+    ToStringBackwards(stringBackwards->GetLeft());
+    ToStringBackwards(stringBackwards->GetRight());
+
+    ss << stringBackwards->GetContents() << " ";
+    cout << "ss: " << ss.str() << "\n";
+  }
+  return ss.str();
+
 }
 
 #endif
