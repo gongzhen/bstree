@@ -8,8 +8,11 @@
 #include "bst_nodet.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
 using std::string;
+using std::stringstream;
+using std::cout;
 
 template<typename T>
 class BSTreeT {
@@ -39,13 +42,12 @@ class BSTreeT {
 
     // the help
     void Clear(BSTNodeT<T>*& clear);
-    void Insert(T value, BSTNodeT<T>*& insert);
+    int Insert(T value, BSTNodeT<T>*& insert);
     bool Exists(T value, BSTNodeT<T>*& exists);
     int Remove(T value, BSTNodeT<T>*& remove);
     BSTNodeT<T>* Get(T value, BSTNodeT<T>*& get);
     string ToStringForwards(BSTNodeT<T>*& stringForward);
     string ToStringBackwards(BSTNodeT<T>*& stringBackwards);
-
 };
 
 template<typename T>
@@ -71,8 +73,7 @@ void BSTreeT<T>::Clear() {
 
 template<typename T>
 int BSTreeT<T>::Insert(T value) {
-  Insert(value, root_ptr_);
-  return 0;
+  return Insert(value, root_ptr_);
 }
 
 template<typename T>
@@ -112,8 +113,20 @@ void BSTreeT<T>::Clear(BSTNodeT<T>*& clear) {
 }
 
 template<typename T>
-void BSTreeT<T>::Insert(T value, BSTNodeT<T>*& insert) {
-
+int BSTreeT<T>::Insert(T value, BSTNodeT<T>*& insert) {
+  if (insert == NULL) {
+    BSTNodeT<T> *newNode = new BSTNodeT<T>(value);
+    insert = newNode;
+    cout << "inserted: " << value << "\n";
+    size_++;
+    return 1;
+  } else if (insert->GetContents() > value) {
+    Insert(value, insert->GetLeft());
+  } else if (insert->GetContents() < value) {
+    Insert(value, insert->GetRight());
+  } else {
+    return 0;
+  }
 }
 
 template<typename T>
@@ -186,20 +199,28 @@ BSTNodeT<T>* BSTreeT<T>::Get(T value, BSTNodeT<T>*& get) {
   if (get->GetContents() == value) {
     return get;
   }
-
-  if (get->GetLeft() == NULL) {
-
-  }
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringForwards(BSTNodeT<T>*& stringForward) {
-  return "string";
+  stringstream ss;
+
+  if (stringForward != NULL) {
+    if (stringForward->GetLeft() != NULL) {
+      ToStringForwards(stringForward->GetLeft());
+    }
+    if (stringForward->GetRight() != NULL) {
+      ToStringForwards(stringForward->GetRight());
+    }
+    ss << stringForward->GetContents() << " ";
+  }
+
+  return ss.str();
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringBackwards(BSTNodeT<T>*& stringBackwards) {
-  return "string";
+  return "";
 }
 
 #endif

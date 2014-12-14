@@ -26,17 +26,24 @@ class BSTNodeT {
 
 template<typename T>
 BSTNodeT<T>::BSTNodeT() {
-
+  contents_;
+  count_added_ = 0;
+  left_ptr = NULL;
+  right_ptr = NULL;
 }
 
 template<typename T>
 BSTNodeT<T>::BSTNodeT(T contents) {
   contents_ = contents;
+  count_added_ = 0;
+  left_ptr = NULL;
+  right_ptr = NULL;
 }
 
 template<typename T>
 BSTNodeT<T>::~BSTNodeT() {
-
+  left_ptr = NULL;
+  right_ptr = NULL;
 }
 
 template<typename T>
