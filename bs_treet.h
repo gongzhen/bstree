@@ -46,7 +46,7 @@ class BSTreeT {
     bool Exists(T value, BSTNodeT<T>*& exists);
     int Remove(T value, BSTNodeT<T>*& remove);
     BSTNodeT<T>* Get(T value, BSTNodeT<T>*& get);
-    string ToStringForwards(std::ostream &out, BSTNodeT<T>*& stringForward);
+    string ToStringForwards(BSTNodeT<T>*& stringForward);
     string ToStringBackwards(BSTNodeT<T>*& stringBackwards);
 };
 
@@ -93,8 +93,7 @@ BSTNodeT<T>* BSTreeT<T>::Get(T value) {
 
 template<typename T>
 string BSTreeT<T>::ToStringForwards() {
-  //return ToStringForwards(root_ptr_);
-  return "";
+  return ToStringForwards(root_ptr_);
 }
 
 template<typename T>
@@ -115,16 +114,16 @@ void BSTreeT<T>::Clear(BSTNodeT<T>*& clear) {
 
 template<typename T>
 int BSTreeT<T>::Insert(T value, BSTNodeT<T>*& insert) {
+  // List empty
   if (insert == NULL) {
     BSTNodeT<T> *newNode = new BSTNodeT<T>(value);
     insert = newNode;
-    cout << "inserted: " << value << "\n";
     size_++;
     return 1;
   } else if (insert->GetContents() > value) {
-    Insert(value, insert->GetLeft());
+    return Insert(value, insert->GetLeft());
   } else if (insert->GetContents() < value) {
-    Insert(value, insert->GetRight());
+    return Insert(value, insert->GetRight());
   } else {
     return 0;
   }
@@ -203,25 +202,33 @@ BSTNodeT<T>* BSTreeT<T>::Get(T value, BSTNodeT<T>*& get) {
 }
 
 template<typename T>
-string BSTreeT<T>::ToStringForwards(std::ostream &out, BSTNodeT<T>*& stringForward) {
-  if (stringForward == NULL) {
+string BSTreeT<T>::ToStringForwards(BSTNodeT<T>*& stringForward) {
+  stringstream ss;
+  if (stringForward != NULL) {
+    ss << ToStringForwards(stringForward->GetLeft());
+
+    ss << stringForward->GetContents() << ", ";
+
+    ss << ToStringForwards(stringForward->GetRight());
   }
-  return "";
+  string cut = ss.str();
+  cut = cut.substr(0, cut.length() - 1);
+  return cut;
 }
 
 template<typename T>
 string BSTreeT<T>::ToStringBackwards(BSTNodeT<T>*& stringBackwards) {
   stringstream ss;
   if (stringBackwards != NULL) {
-    cout << "Contents: " << stringBackwards->GetContents() << "\n";
-    ToStringBackwards(stringBackwards->GetLeft());
-    ToStringBackwards(stringBackwards->GetRight());
+    ss << ToStringBackwards(stringBackwards->GetRight());
 
-    ss << stringBackwards->GetContents() << " ";
-    cout << "ss: " << ss.str() << "\n";
+    ss << stringBackwards->GetContents() << ", ";
+
+    ss << ToStringBackwards(stringBackwards->GetLeft());
   }
-  return ss.str();
-
+  string cut = ss.str();
+  cut = cut.substr(0, cut.length() - 1);
+  return cut;;
 }
 
 #endif
